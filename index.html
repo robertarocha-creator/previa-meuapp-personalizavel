@@ -112,7 +112,7 @@
   .sheet{flex:1;background:var(--bg);border-radius:22px 22px 0 0;margin-top:-12px;position:relative;display:flex;flex-direction:column;overflow:hidden}
   .grab{width:38px;height:5px;border-radius:3px;background:#C4CAD3;margin:9px auto 2px}
   .sheet-head{display:flex;align-items:center;gap:11px;padding:6px 20px 4px}
-  .sheet-head .title{font-size:23px;font-weight:600;flex:1}
+  .sheet-head .title{font-size:21px;font-weight:600;flex:1}
   .sheet-head .ico{color:var(--icon)}
   .sheet-head .x{color:#7A8493}
 
@@ -134,26 +134,26 @@
   .bigico svg{width:40px;height:40px}
 
   .scroll.sheetscroll{padding:0 20px 24px}
-  .monthlbl{text-align:center;font-weight:600;font-size:15px;color:#1B2735;margin:18px 0 12px}
+  .monthlbl{text-align:center;font-weight:600;font-size:14px;color:#1B2735;margin:16px 0 11px}
 
   .card{background:var(--card);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(16,28,44,.05)}
   .listcard{position:relative}
   .listcard.unread{border-left:4px solid var(--brand);padding-left:14px}
   .lc-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-  .lc-title{font-size:16px;font-weight:600;line-height:1.25}
-  .lc-sub{display:flex;gap:34px;margin-top:12px}
+  .lc-title{font-size:15px;font-weight:600;line-height:1.25}
+  .lc-sub{display:flex;gap:16px;margin-top:12px}
   .lc-sub .k{font-size:12.5px;color:var(--ink3)}
-  .lc-sub .v{font-size:15px;color:#28303B;margin-top:2px}
-  .lc-val{margin-left:auto;text-align:right}
-  .badge{flex:none;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:20px}
+  .lc-sub .v{font-size:14px;color:#28303B;margin-top:2px;white-space:nowrap}
+  .lc-val{margin-left:auto;text-align:right;white-space:nowrap}
+  .badge{flex:none;font-size:12px;font-weight:600;padding:5px 11px;border-radius:20px}
   .b-open{background:var(--neu-bg);color:var(--neu-tx)}
   .b-late{background:var(--late-bg);color:var(--late-tx)}
   .b-paid{background:var(--ok-bg);color:var(--ok-tx)}
   .b-prog{background:var(--brand-soft);color:var(--brand-ink)}
 
   /* botões / linhas genéricas */
-  .pbtn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;height:52px;border-radius:13px;background:var(--brand);color:var(--on-brand);font-size:16px;font-weight:600;border:none;cursor:pointer}
-  .rowbtn{display:flex;align-items:center;gap:13px;background:var(--card);border-radius:13px;padding:16px;margin-bottom:11px;font-size:16px;color:#1B2735;box-shadow:0 1px 2px rgba(16,28,44,.05);cursor:pointer}
+  .pbtn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;height:52px;border-radius:13px;background:var(--brand);color:var(--on-brand);font-size:15px;font-weight:600;border:none;cursor:pointer}
+  .rowbtn{display:flex;align-items:center;gap:13px;background:var(--card);border-radius:13px;padding:15px 16px;margin-bottom:11px;font-size:15px;color:#1B2735;box-shadow:0 1px 2px rgba(16,28,44,.05);cursor:pointer}
   .rowbtn svg{width:22px;height:22px;color:var(--icon)}
   .rowbtn .count{margin-left:auto;background:#E7EAF0;color:#5A6573;font-size:13px;font-weight:600;min-width:26px;height:26px;border-radius:13px;display:flex;align-items:center;justify-content:center;padding:0 7px}
 
@@ -161,19 +161,19 @@
   .backlink{display:flex;align-items:center;gap:6px;color:var(--brand-ink);font-size:17px;font-weight:500;padding:54px 20px 6px;cursor:pointer}
   .backlink svg{width:22px;height:22px}
   .detail-head{padding:8px 20px 16px;border-bottom:1px solid var(--line)}
-  .detail-head .dt{font-size:22px;font-weight:600;line-height:1.25;padding-right:6px}
+  .detail-head .dt{font-size:20px;font-weight:600;line-height:1.25;padding-right:6px}
   .detail-head .row2{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px}
-  .detail-head .price{font-size:26px;font-weight:600}
+  .detail-head .price{font-size:23px;font-weight:600}
   .detail-head .date{font-size:14px;color:var(--ink3)}
 
   /* início */
   .greet{padding:18px 22px 2px;font-size:24px;font-weight:600}
   .summary{margin:14px 20px 0;background:var(--card);border-radius:16px;padding:18px;box-shadow:0 1px 2px rgba(16,28,44,.05)}
-  .summary .lbl{display:flex;align-items:center;justify-content:space-between;color:var(--ink2);font-size:16px}
-  .summary .big{font-size:30px;font-weight:600;margin:6px 0 14px}
+  .summary .lbl{display:flex;align-items:center;justify-content:space-between;color:var(--ink2);font-size:15px}
+  .summary .big{font-size:26px;font-weight:600;margin:6px 0 14px}
   .summary .cols{display:flex;justify-content:space-between}
   .summary .cols .c .k{font-size:13px;color:var(--ink3)}
-  .summary .cols .c .v{font-size:18px;margin-top:3px}
+  .summary .cols .c .v{font-size:16px;margin-top:3px}
   .summary .cols .c .v.late{color:var(--late-tx)}
   .seclbl{padding:20px 22px 4px;font-size:18px;font-weight:600}
   .subsec{padding:4px 22px 2px;font-size:14px;color:var(--ink2)}
@@ -185,7 +185,7 @@
   .pend .cnt{min-width:26px;height:26px;border-radius:13px;background:#E7EAF0;color:#5A6573;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 7px}
   .pend .cnt.hot{background:#FAD9D9;color:#C44}
   .pend .cnt.acc{background:#FFCC00;color:#5b4b00}
-  .pend .pname{margin-top:18px;font-size:16px}
+  .pend .pname{margin-top:16px;font-size:15px}
   .msgcard{flex:none;width:250px;background:var(--card);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(16,28,44,.05);position:relative}
   .msgcard.unread{border-left:4px solid var(--brand)}
   .msgcard .mtop{display:flex;align-items:center;justify-content:space-between}
@@ -267,7 +267,7 @@
   .kv.last{border-bottom:none}
   .kv .old{color:var(--ink3);font-weight:400;margin-right:6px}
   .recalcbar{padding:14px 18px 18px;background:var(--bg)}
-  .recalcbtn{width:100%;height:54px;border:none;border-radius:13px;background:var(--brand);color:var(--on-brand);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+  .recalcbtn{width:100%;height:54px;border:none;border-radius:13px;background:var(--brand);color:var(--on-brand);font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
   .recalcbtn.is-loading{opacity:.55;cursor:default}
   .spin{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.45);border-top-color:#fff;border-radius:50%;display:inline-block;animation:spin .7s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -418,11 +418,11 @@ function initials(name){const p=name.trim().split(/\s+/).filter(Boolean);if(!p.l
 const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 
 /* ---------- partials ---------- */
-const CLIENT='Sua Contabilidade Ltda';
+const CLIENT='Postback Sistemas Empresariais Ltda';
 const CNPJ='12.345.678/0001-90';
 function appbar(bell){
   return `<div class="appbar ${bell?'with-bell':''}">
-    <div class="co"><div class="co-name">${esc(state.office)}</div><div class="co-doc">${CNPJ}</div></div>
+    <div class="co"><div class="co-name">${esc(CLIENT)}</div><div class="co-doc">${CNPJ}</div></div>
     ${bell?`<span class="bell">${ic.chat}<span class="pip"></span></span>`:`<span class="chev">${ic.chevR}</span>`}
   </div>`;
 }
@@ -500,8 +500,8 @@ screens.inicio=()=>`<div class="hasnav">${appbar(true)}
 
 screens.contador=()=>`<div class="hasnav">${appbar(false)}
   <div class="scroll">
-    <div style="padding:18px 22px 0"><div style="font-size:26px;font-weight:600">Contador</div>
-    <div style="font-size:18px;color:var(--ink2);margin-top:4px">${esc(state.office)}</div></div>
+    <div style="padding:18px 22px 0"><div style="font-size:23px;font-weight:600">Contador</div>
+    <div style="font-size:16px;color:var(--ink2);margin-top:4px">${esc(state.office)}</div></div>
     <div class="summary" data-go="apagar" style="margin-top:16px">
       <div class="lbl">Pagamentos em aberto <span style="color:var(--ink3)">${ic.chevR}</span></div>
       <div class="big">R$ 12.430,32</div>
