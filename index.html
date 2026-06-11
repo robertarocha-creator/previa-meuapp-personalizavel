@@ -12,6 +12,7 @@
     --brand-soft:#D6DDEC;
     --brand-hill:#0B3585;
     --bg:#F1F3F7;
+    --icon:#2A3340;
     --card:#FFFFFF;
     --ink:#15212E;
     --ink2:#6B7585;
@@ -112,7 +113,7 @@
   .grab{width:38px;height:5px;border-radius:3px;background:#C4CAD3;margin:9px auto 2px}
   .sheet-head{display:flex;align-items:center;gap:11px;padding:6px 20px 4px}
   .sheet-head .title{font-size:23px;font-weight:600;flex:1}
-  .sheet-head .ico{color:var(--brand-ink)}
+  .sheet-head .ico{color:var(--icon)}
   .sheet-head .x{color:#7A8493}
 
   .chips{display:flex;gap:9px;padding:14px 20px 4px;overflow-x:auto}
@@ -122,7 +123,7 @@
 
   .searchrow{display:flex;align-items:center;gap:12px;padding:14px 20px 6px}
   .search{flex:1;display:flex;align-items:center;gap:9px;background:#E7EAF0;border-radius:11px;padding:11px 13px;color:#9AA2AE;font-size:15px}
-  .filticon{color:var(--brand-ink)}
+  .filticon{color:var(--icon)}
   .appbar .bell svg{width:26px;height:26px}
   .appbar .chev svg{width:22px;height:22px}
   .sheet-head svg{width:25px;height:25px;flex:none}
@@ -153,7 +154,7 @@
   /* botões / linhas genéricas */
   .pbtn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;height:52px;border-radius:13px;background:var(--brand);color:var(--on-brand);font-size:16px;font-weight:600;border:none;cursor:pointer}
   .rowbtn{display:flex;align-items:center;gap:13px;background:var(--card);border-radius:13px;padding:16px;margin-bottom:11px;font-size:16px;color:#1B2735;box-shadow:0 1px 2px rgba(16,28,44,.05);cursor:pointer}
-  .rowbtn svg{width:22px;height:22px;color:var(--brand-ink)}
+  .rowbtn svg{width:22px;height:22px;color:var(--icon)}
   .rowbtn .count{margin-left:auto;background:#E7EAF0;color:#5A6573;font-size:13px;font-weight:600;min-width:26px;height:26px;border-radius:13px;display:flex;align-items:center;justify-content:center;padding:0 7px}
 
   /* back link (detalhe) */
@@ -180,7 +181,7 @@
   .hscroll::-webkit-scrollbar{height:0}
   .pend{flex:none;width:150px;background:var(--card);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(16,28,44,.05)}
   .pend .ptop{display:flex;align-items:center;justify-content:space-between}
-  .pend .ptop svg{width:26px;height:26px;color:var(--brand-ink)}
+  .pend .ptop svg{width:26px;height:26px;color:var(--icon)}
   .pend .cnt{min-width:26px;height:26px;border-radius:13px;background:#E7EAF0;color:#5A6573;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 7px}
   .pend .cnt.hot{background:#FAD9D9;color:#C44}
   .pend .cnt.acc{background:#FFCC00;color:#5b4b00}
@@ -188,7 +189,7 @@
   .msgcard{flex:none;width:250px;background:var(--card);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(16,28,44,.05);position:relative}
   .msgcard.unread{border-left:4px solid var(--brand)}
   .msgcard .mtop{display:flex;align-items:center;justify-content:space-between}
-  .msgcard .mtop svg{width:22px;height:22px;color:var(--brand-ink)}
+  .msgcard .mtop svg{width:22px;height:22px;color:var(--icon)}
   .msgcard .mt{font-size:16px;font-weight:600;margin-top:12px}
   .msgcard .mn{font-size:13.5px;color:var(--ink2);margin-top:3px}
   .msgcard .md{font-size:13px;color:var(--ink3);margin-top:10px}
@@ -220,7 +221,7 @@
   .cat svg{width:24px;height:24px}
   .cat.on{background:var(--brand);color:var(--on-brand)}
   .filecard{display:flex;align-items:center;gap:13px;background:var(--card);border-radius:13px;padding:15px;margin-bottom:11px;box-shadow:0 1px 2px rgba(16,28,44,.05)}
-  .filecard .ft{flex:none;width:30px;height:36px;border-radius:5px;border:1.6px solid var(--brand-ink);color:var(--brand-ink);font-size:8px;font-weight:800;display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px;position:relative}
+  .filecard .ft{flex:none;width:30px;height:36px;border-radius:5px;border:1.6px solid var(--icon);color:var(--icon);font-size:8px;font-weight:800;display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px;position:relative}
   .filecard .fn{font-size:15px;color:#1B2735}
   .filecard .fk{font-size:13px;color:var(--ink3);margin-top:2px}
   .filecard .fd{margin-left:auto;font-size:13px;color:var(--ink3)}
@@ -407,6 +408,7 @@ function applyBrand(){
   r.setProperty('--on-brand',onBrand(state.brand));
   r.setProperty('--brand-ink',ink(state.brand));
   r.setProperty('--brand-soft',lighten(state.brand,0.80));
+  r.setProperty('--bg',lighten(state.brand,0.95));
   r.setProperty('--brand-hill',lum(state.brand)>0.62?darken(state.brand,0.10):lighten(state.brand,0.10));
   document.getElementById('hexout').textContent=state.brand.toUpperCase();
   document.getElementById('picker').value=state.brand;
@@ -513,6 +515,12 @@ screens.contador=()=>`<div class="hasnav">${appbar(false)}
       <div class="pend" data-go="apagar"><div class="ptop">${ic.pay}<span class="cnt hot">5</span></div><div class="pname">A pagar</div></div>
       <div class="pend" data-go="aenviar"><div class="ptop">${ic.send}<span class="cnt acc">1</span></div><div class="pname">A enviar</div></div>
       <div class="pend" data-go="recebidos"><div class="ptop">${ic.inbox}<span class="cnt">2</span></div><div class="pname">Recebidos</div></div>
+    </div>
+    <div style="border-top:1px solid var(--line);margin:18px 20px 0"></div>
+    <div class="subsec" style="padding:16px 22px 2px">Mensagens não lidas</div>
+    <div class="hscroll">
+      <div class="msgcard" data-go="comunicado"><div class="mtop">${ic.mega}</div><div class="mt">Funcionamento durante o carnaval</div><div class="md">Hoje, 18:15</div></div>
+      <div class="msgcard unread" data-go="conversa"><div class="mtop">${ic.chat}<span class="badge b-prog">Em andamento</span></div><div class="mt">Correção de folha</div><div class="mn">Robson Andrade Silva</div><div class="md">Hoje, 18:15</div></div>
     </div>
     <div style="padding:14px 20px 0">
       <div class="rowbtn" data-go="mensagens">${ic.chat}<span>Mensagens</span><span class="count">5</span></div>
@@ -694,7 +702,7 @@ screens.empresa=()=>`<div class="hasnav">${appbar(false)}
 
 function tabbar(active){
   const t=(id,icon,label)=>`<div class="tab ${active===id?'on':''}" data-go="${id}">${icon}<span>${label}</span></div>`;
-  return `<div class="tabbar">${t('inicio',ic.home,'Início')}${t('contador',ic.bag,'Contador')}${t('empresa',ic.store,'Empresa')}${t('menu',ic.grid,'Menu')}</div>`;
+  return `<div class="tabbar">${t('contador',ic.bag,'Contador')}${t('empresa',ic.store,'Empresa')}${t('menu',ic.grid,'Menu')}</div>`;
 }
 
 /* telas com topo claro (status bar escura) */
@@ -716,7 +724,7 @@ function render(){
   document.getElementById('hint').style.opacity = state.screen==='onboarding'?'1':'0';
   // bind onboarding next
   const nx=document.getElementById('onbnext');
-  if(nx) nx.onclick=()=>{ if(state.step<3){state.step++;render();} else {go('inicio');} };
+  if(nx) nx.onclick=()=>{ if(state.step<3){state.step++;render();} else {go('contador');} };
   const rb=document.getElementById('recalcbtn');
   if(rb && state.recalc==='idle'){ rb.onclick=()=>{ state.recalc='loading'; render(); setTimeout(()=>{ if(state.screen==='apagar-item'){ state.recalc='done'; render(); } }, 1900); }; }
   const pt=document.getElementById('paytoggle');
@@ -749,7 +757,7 @@ function buildSwatches(){
 }
 function buildNav(){
   const items=[
-    ['onboarding','Onboarding',ic.home],['inicio','Início',ic.home],['contador','Contador',ic.bag],
+    ['onboarding','Onboarding',ic.home],['contador','Contador',ic.bag],
     ['apagar','A pagar (lista)',ic.pay],['apagar-item','A pagar (detalhe)',ic.pay],
     ['aenviar','A enviar',ic.send],['recebidos','Recebidos',ic.inbox],
     ['mensagens','Mensagens',ic.chat],['conversa','Atendimento',ic.chat],['comunicado','Comunicado',ic.mega],
