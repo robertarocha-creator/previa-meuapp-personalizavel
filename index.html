@@ -300,6 +300,26 @@
   .sb-lbl{font-size:12px;color:#fff;max-width:74px;text-align:center;line-height:1.15;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-shadow:0 1px 3px rgba(0,0,0,.45)}
   .sb-dock{position:absolute;left:16px;right:16px;bottom:70px;z-index:2;height:84px;border-radius:30px;background:rgba(255,255,255,.16);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:space-around;padding:0 14px}
   .sb-hint{position:absolute;left:0;right:0;bottom:30px;z-index:2;text-align:center;color:rgba(255,255,255,.92);font-size:13px}
+  .rb-chev{margin-left:auto;color:var(--ink3);display:flex;align-items:center}
+  .rb-chev svg{width:20px;height:20px}
+  .qa{display:inline-flex;flex-direction:column;gap:14px;background:var(--card);border-radius:13px;box-shadow:0 1px 2px rgba(16,28,44,.05);padding:16px;min-width:138px}
+  .qa svg{width:26px;height:26px;color:var(--icon)}
+  .qal{font-size:15px;font-weight:500}
+  .chart-card .ch-head{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600}
+  .chart-card .ch-head svg{width:22px;height:22px;color:var(--icon)}
+  .chart-card .ch-sub{color:var(--ink2);font-size:13px;margin-top:14px}
+  .chart-card .ch-val{font-size:22px;font-weight:600;margin-top:2px}
+  .bars{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;height:118px;margin-top:16px}
+  .bars .bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:8px}
+  .bars .bar>span{width:100%;max-width:24px;background:var(--brand);border-radius:7px 7px 0 0;display:block}
+  .bars .bar em{font-size:11px;color:var(--ink3);font-style:normal}
+  .numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:6px 20px 8px}
+  .numpad button{height:50px;border:none;border-radius:12px;background:var(--card);font-size:20px;font-weight:500;color:#1B2735;cursor:pointer;box-shadow:0 1px 2px rgba(16,28,44,.06)}
+  .numpad button.np-empty{background:transparent;box-shadow:none;cursor:default}
+  .valbox{margin-top:8px;border:1.6px solid var(--brand);border-radius:12px;padding:14px 16px;font-size:20px;font-weight:600;color:#1B2735}
+  .actionbar{padding:10px 18px 16px;background:var(--bg)}
+  .actionbar .pbtn{width:100%}
+  .pbtn:disabled{opacity:.45;cursor:default}
 </style>
 </head>
 <body>
@@ -424,7 +444,7 @@ function onBrand(h){return lum(h)>0.62?'#10202E':'#FFFFFF';}
 function ink(h){return lum(h)>0.5?darken(h,0.55):h;}
 
 /* ---------- estado ---------- */
-const state={ brand:'#082D72', office:'Sua Contabilidade Ltda', logo:null, screen:'springboard', step:0, recalc:'idle', paid:false };
+const state={ brand:'#082D72', office:'Sua Contabilidade Ltda', logo:null, screen:'springboard', step:0, recalc:'idle', paid:false, emit:null, noteSel:0 };
 
 function applyBrand(){
   const r=document.documentElement.style;
@@ -752,7 +772,50 @@ screens.menu=()=>`<div class="hasnav">${appbar(false)}
   ${tabbar('menu')}</div>`;
 
 screens.empresa=()=>`<div class="hasnav">${appbar(false)}
-  <div class="scroll"><div style="padding:60px 30px;text-align:center;color:var(--ink3)"><span class="bigico">${ic.store}</span><div style="margin-top:14px;font-size:15px">Aba Empresa</div><div style="font-size:13px;margin-top:6px">Telas ainda não incluídas nesta prévia.</div></div></div>
+  <div class="scroll">
+    <div style="padding:18px 22px 6px"><div style="font-size:23px;font-weight:600">Empresa</div></div>
+    <div style="padding:0 20px">
+      <div class="rowbtn" style="cursor:default">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 010-5.6l2-2a4 4 0 015.6 5.6l-1 1"/><path d="M14 10a4 4 0 010 5.6l-2 2a4 4 0 01-5.6-5.6l1-1"/></svg>
+        <div style="line-height:1.3"><div style="font-weight:500">4 contas conectadas</div><div style="font-size:12.5px;color:var(--ink2)">Atualizado em 04/06/2026 às 18:29</div></div>
+        <span class="rb-chev">${ic.chevR}</span>
+      </div>
+    </div>
+    <div style="padding:12px 20px 0"><div class="qa" data-act="emit-start" style="cursor:pointer"><span>${ic.papers}</span><div class="qal">Emitir NFS-e</div></div></div>
+    <div style="padding:16px 20px 0">
+      <div class="card chart-card">
+        <div class="ch-head">${ic.papers}<span>NFS-e emitidas</span><span class="rb-chev" style="margin-left:auto">${ic.chevR}</span></div>
+        <div class="ch-sub">Este mês</div>
+        <div class="ch-val">R$ 16.300,00</div>
+        <div class="bars">
+          <div class="bar"><span style="height:46%"></span><em>Dez</em></div>
+          <div class="bar"><span style="height:72%"></span><em>Jan</em></div>
+          <div class="bar"><span style="height:64%"></span><em>Fev</em></div>
+          <div class="bar"><span style="height:92%"></span><em>Mar</em></div>
+          <div class="bar"><span style="height:44%"></span><em>Abr</em></div>
+          <div class="bar"><span style="height:60%"></span><em>Mai</em></div>
+          <div class="bar"><span style="height:38%"></span><em>Jun</em></div>
+        </div>
+      </div>
+    </div>
+    <div class="subsec" style="padding:18px 22px 0">Última NFS-e emitida</div>
+    <div style="padding:8px 20px 0">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div><div style="font-weight:600">Nibo Softwares e Cursos Ltda</div><div style="font-size:12.5px;color:var(--ink2);margin-top:2px">12.345.678/0001-90</div></div>
+          <span class="badge b-prog">Processando</span>
+        </div>
+        <div class="lc-sub" style="margin-top:14px">
+          <div><div class="k">Vencimento</div><div class="v">10/06/2026</div></div>
+          <div class="lc-val"><div class="k">Valor</div><div class="v">R$ 6.300,00</div></div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:14px 20px 4px">
+      <div class="rowbtn" data-go="nfse">${ic.papers}<span>NFS-e</span><span class="rb-chev">${ic.chevR}</span></div>
+      <div class="rowbtn" style="cursor:default"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10.5h18"/><circle cx="17" cy="14.5" r="1.2" fill="currentColor" stroke="none"/></svg><span>Minhas contas</span><span class="rb-chev">${ic.chevR}</span></div>
+    </div>
+  </div>
   ${tabbar('empresa')}</div>`;
 
 function tabbar(active){
@@ -761,7 +824,7 @@ function tabbar(active){
 }
 
 /* telas com topo claro (status bar escura) */
-const LIGHTTOP=new Set(['apagar-item','conversa','comunicado']);
+const LIGHTTOP=new Set(['apagar-item','conversa','comunicado','emitir','nfse-detail']);
 
 /* ---------- render ---------- */
 function render(){
@@ -791,7 +854,100 @@ function sbicons(col){return `
   <svg viewBox="0 0 20 16" fill="none" stroke="${col}" stroke-width="1.6"><path d="M2 6a12 12 0 0116 0"/><path d="M5 9a8 8 0 0110 0"/><path d="M8 12a4 4 0 014 0"/></svg>
   <svg viewBox="0 0 26 14" fill="none" stroke="${col}" stroke-width="1.3"><rect x="1" y="2" width="20" height="10" rx="3"/><rect x="3" y="4" width="13" height="6" rx="1.5" fill="${col}"/><rect x="22.5" y="5" width="2" height="4" rx="1" fill="${col}"/></svg>`;}
 
-function go(id){ if(!screens[id])return; state.recalc='idle'; state.paid=false; state.screen=id; if(id==='onboarding')state.step=0; render(); }
+
+/* ---------- Fluxo NFS-e (Empresa) ---------- */
+let EMITTED=[];
+const CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg>';
+const CLIENTS=[['Bazar de Flores Ltda','12.345.678/0001-90'],['Mercado São João Ltda','23.456.789/0001-01'],['Padaria Pão Quente Ltda','34.567.890/0001-12'],['Studio Alpha Design Ltda','45.678.901/0001-23'],['Construtora Horizonte Ltda','56.789.012/0001-34']];
+const SERVICES=['Licenciamento de software','Consultoria em TI','Desenvolvimento de sistemas','Suporte técnico','Treinamento'];
+function brl(c){return 'R$ '+(c/100).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function startEmit(){ state.emit={step:'client',client:'',doc:'',cents:0,service:'',email:'postarek@gmail.com',outro:false}; go('emitir'); }
+function toast(msg){ const s=document.getElementById('screen'); if(!s)return; const t=document.createElement('div'); t.className='toast'; t.innerHTML='<span class="tcheck">&#10003;</span> '+msg; s.appendChild(t); setTimeout(()=>{t.remove();},3400); }
+
+function nbadge(st){ const c= st==='Processando'?'b-prog':(st==='Autorizada'||st==='Emitida'?'b-paid':'b-late'); return '<span class="badge '+c+'">'+st+'</span>'; }
+screens.nfse=()=>{
+  const emitted=EMITTED.map((n,i)=>`<div class="card listcard" data-act="open-note" data-i="${i}" style="cursor:pointer"><div class="lc-top"><div class="lc-title">${n.client}</div>${nbadge(n.status)}</div><div style="font-size:12.5px;color:var(--ink2);margin-top:2px">${n.doc}</div><div class="lc-sub" style="margin-top:10px"><div><div class="k">Emissão</div><div class="v">${n.date}</div></div><div class="lc-val"><div class="k">Valor</div><div class="v">${brl(n.cents)}</div></div></div></div>`).join('');
+  const base=[['Nibo Softwares e Cursos Ltda','12.345.678/0001-90','Processando','R$ 6.300,00','10/06/2026'],['Mercado São João Ltda','23.456.789/0001-01','Emitida','R$ 2.360,20','08/06/2026'],['Padaria Pão Quente Ltda','34.567.890/0001-12','Cancelada','R$ 1.180,00','02/06/2026']]
+   .map(([n,d,s,v,dt])=>`<div class="card listcard"><div class="lc-top"><div class="lc-title">${n}</div>${nbadge(s)}</div><div style="font-size:12.5px;color:var(--ink2);margin-top:2px">${d}</div><div class="lc-sub" style="margin-top:10px"><div><div class="k">Emissão</div><div class="v">${dt}</div></div><div class="lc-val"><div class="k">Valor</div><div class="v">${v}</div></div></div></div>`).join('');
+  return `${appbar(false)}
+  <div class="sheet">
+    ${sheetHead(ic.papers,'NFS-e','empresa')}
+    <div class="chips"><span class="chip on">Todas</span><span class="chip">Pendentes</span><span class="chip">Emitidas</span><span class="chip">Canceladas</span></div>
+    <div class="searchrow"><span class="search">${ic.search} Buscar...</span><span class="filticon">${ic.filter}</span></div>
+    <div class="scroll sheetscroll"><div class="monthlbl">Junho 2026</div>${emitted}${base}</div>
+  </div>
+  <div class="fab" data-act="emit-start">${ic.plus}</div>`;
+};
+function emitHeader(title,back){ return `<div style="height:46px"></div><div class="sheet-head" style="gap:8px">${back?`<span class="ico" data-act="emit-back" style="cursor:pointer">${ic.chevL}</span>`:''}<span class="title" style="font-size:18px;flex:1">${title}</span><span class="x" data-go="empresa">${ic.x}</span></div>`; }
+screens.emitir=()=>{
+  const e=state.emit; if(!e) return screens.empresa();
+  if(e.step==='value') return `<div class="screen-light">
+    ${emitHeader('Detalhes da nota',true)}
+    <div class="scroll" style="padding:6px 20px 12px">
+      <div style="color:var(--ink2);font-size:13px">Emitido para</div>
+      <div style="font-weight:600;margin-top:3px">${e.client}</div>
+      <div style="font-size:12.5px;color:var(--ink2)">${e.doc}</div>
+      <div style="color:var(--ink2);font-size:13px;margin-top:22px">Informe o valor</div>
+      <div class="valbox">${brl(e.cents)}</div>
+    </div>
+    <div class="numpad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button data-act="emit-num" data-n="${n}">${n}</button>`).join('')}<button class="np-empty"></button><button data-act="emit-num" data-n="0">0</button><button data-act="emit-del">&#9003;</button></div>
+    <div class="actionbar"><button class="pbtn" data-act="emit-next" ${e.cents>0?'':'disabled'}>Continuar</button></div>
+  </div>`;
+  if(e.step==='service') return `<div class="screen-light">
+    ${emitHeader('Perfil de serviço',true)}
+    <div style="padding:4px 20px 8px"><div class="search">${ic.search}<span>Buscar...</span></div></div>
+    <div class="scroll" style="padding:4px 20px 16px">${SERVICES.map(s=>`<div class="rowbtn" data-act="emit-service" data-name="${s}"><span style="flex:1">${s}</span>${e.service===s?`<span class="rb-chev" style="color:var(--brand-ink)">${CHECK}</span>`:''}</div>`).join('')}</div>
+    <div class="actionbar"><button class="pbtn" data-act="emit-next" ${e.service?'':'disabled'}>Continuar</button></div>
+  </div>`;
+  if(e.step==='confirm') return `<div class="screen-light">
+    ${emitHeader('Confirme as informações',true)}
+    <div class="scroll" style="padding:8px 20px 16px">
+      <div class="card" style="padding:0">
+        <div class="kv"><span style="color:var(--ink2)">Emitido para</span><b style="font-weight:500;text-align:right">${e.client}</b></div>
+        <div class="kv"><span style="color:var(--ink2)">Valor</span><b style="font-weight:500">${brl(e.cents)}</b></div>
+        <div class="kv"><span style="color:var(--ink2)">Perfil de serviço</span><b style="font-weight:500;text-align:right">${e.service}</b></div>
+        <div class="kv last"><span style="color:var(--ink2)">Enviar nota para</span><b style="font-weight:500">${e.email}</b></div>
+      </div>
+      <div class="card" style="padding:0;margin-top:12px">
+        <div class="kv"><span>Impostos</span><b style="font-weight:500">R$ 600,00</b></div>
+        <div class="kv"><span>Discriminação do serviço <em style="font-style:normal;color:var(--ink3)">(Opcional)</em></span><span class="rb-chev">${ic.chevR}</span></div>
+        <div class="kv"><span>Informações complementares <em style="font-style:normal;color:var(--ink3)">(Opcional)</em></span><span class="rb-chev">${ic.chevR}</span></div>
+        <div class="kv last" data-act="emit-toggle" style="cursor:pointer"><span style="flex:1">Prestação de serviço em outro município</span><span class="switch ${e.outro?'on':''}"><span class="knob"></span></span></div>
+      </div>
+    </div>
+    <div class="actionbar"><button class="pbtn" data-act="emit-finish">Emitir</button></div>
+  </div>`;
+  return `<div class="screen-light">
+    ${emitHeader('Selecione o cliente',true)}
+    <div style="padding:4px 20px 8px"><div class="search">${ic.search}<span>Buscar...</span></div></div>
+    <div class="scroll" style="padding:4px 20px 18px">${CLIENTS.map(([n,d])=>`<div class="rowbtn" data-act="emit-client" data-name="${n}" data-doc="${d}"><div style="flex:1;line-height:1.3"><div style="font-weight:500">${n}</div><div style="font-size:12.5px;color:var(--ink2)">${d}</div></div><span class="rb-chev">${ic.chevR}</span></div>`).join('')}</div>
+  </div>`;
+};
+screens['nfse-detail']=()=>{
+  const n=EMITTED[state.noteSel]; if(!n) return screens.nfse();
+  return `<div class="screen-light">
+    ${back('NFS-e','nfse')}
+    <div class="detail-head">
+      <div class="dt" style="font-size:19px">${n.client}</div>
+      <div style="font-size:12.5px;color:var(--ink2);margin-top:2px">${n.doc}</div>
+      <div class="row2" style="margin-top:12px">${nbadge(n.status)}</div>
+    </div>
+    <div class="scroll" style="padding:14px 20px 28px">
+      <div class="card" style="padding:0">
+        <div class="kv"><span style="color:var(--ink2)">Valor</span><b style="font-weight:500">${brl(n.cents)}</b></div>
+        <div class="kv"><span style="color:var(--ink2)">Emissão</span><b style="font-weight:500">${n.date}</b></div>
+        <div class="kv"><span style="color:var(--ink2)">Nº da nota</span><b style="font-weight:500">${n.num}</b></div>
+        <div class="kv last"><span style="color:var(--ink2)">NFS</span><b style="font-weight:500">${n.nfs}</b></div>
+      </div>
+      <div class="card"><div style="color:var(--ink2);font-size:13px;margin-bottom:5px">Descrição</div>${n.service}</div>
+      <div class="card"><div style="color:var(--ink2);font-size:13px;margin-bottom:5px">Enviado para</div>${n.email}</div>
+      <div class="rowbtn">${ic.download}<span>Baixar XML</span></div>
+      <div class="rowbtn">${ic.download}<span>Baixar PDF</span></div>
+    </div>
+  </div>`;
+};
+
+function go(id){ if(!screens[id])return; state.recalc='idle'; state.paid=false; if(id!=='emitir') state.emit=null; state.screen=id; if(id==='onboarding')state.step=0; render(); }
 
 /* ---------- fit no tablet ---------- */
 function fit(){
@@ -816,7 +972,7 @@ function buildNav(){
     ['apagar','A pagar (lista)',ic.pay],['apagar-item','A pagar (detalhe)',ic.pay],
     ['aenviar','A enviar',ic.send],['recebidos','Recebidos',ic.inbox],
     ['mensagens','Mensagens',ic.chat],['conversa','Atendimento',ic.chat],['comunicado','Comunicado',ic.mega],
-    ['arquivo','Arquivo permanente',ic.archive],['menu','Menu',ic.grid]
+    ['arquivo','Arquivo permanente',ic.archive],['empresa','Empresa',ic.store],['nfse','NFS-e (Empresa)',ic.papers],['menu','Menu',ic.grid]
   ];
   document.getElementById('navlist').innerHTML=items.map(([id,l,i])=>`<button data-go="${id}">${i}<span>${l}</span></button>`).join('');
   document.querySelectorAll('#navlist button').forEach(b=>b.onclick=()=>go(b.dataset.go));
@@ -825,6 +981,21 @@ function buildNav(){
 /* delegação de navegação dentro do app */
 document.getElementById('view').addEventListener('click',e=>{
   const el=e.target.closest('[data-go]'); if(el){ go(el.dataset.go); }
+});
+document.getElementById('view').addEventListener('click',e=>{
+  const a=e.target.closest('[data-act]'); if(!a) return;
+  const act=a.dataset.act, em=state.emit;
+  if(act==='emit-start'){ startEmit(); return; }
+  if(act==='emit-back'){ if(!em){go('empresa');return;} const o=['client','value','service','confirm']; const i=o.indexOf(em.step); if(i<=0){state.emit=null;go('empresa');} else {em.step=o[i-1];render();} return; }
+  if(!em && act.startsWith('emit-')){ return; }
+  if(act==='emit-client'){ em.client=a.dataset.name; em.doc=a.dataset.doc; em.step='value'; render(); return; }
+  if(act==='emit-num'){ em.cents=Math.min(em.cents*10+parseInt(a.dataset.n,10),99999999); render(); return; }
+  if(act==='emit-del'){ em.cents=Math.floor(em.cents/10); render(); return; }
+  if(act==='emit-service'){ em.service=a.dataset.name; render(); return; }
+  if(act==='emit-toggle'){ em.outro=!em.outro; render(); return; }
+  if(act==='emit-next'){ if(em.step==='value'&&em.cents>0){em.step='service';render();} else if(em.step==='service'&&em.service){em.step='confirm';render();} return; }
+  if(act==='emit-finish'){ const num=String(3000+Math.floor(Math.random()*9000)); EMITTED.unshift({client:em.client,doc:em.doc,cents:em.cents,service:em.service,email:em.email,status:'Processando',date:'11/06/2026',num:num,nfs:String(80000+Math.floor(Math.random()*9000))}); state.emit=null; go('nfse'); toast('NFS-e enviada para processamento'); setTimeout(()=>{ if(EMITTED[0])EMITTED[0].status='Autorizada'; if(state.screen==='nfse')render(); },2200); return; }
+  if(act==='open-note'){ state.noteSel=parseInt(a.dataset.i,10); go('nfse-detail'); return; }
 });
 
 /* cor personalizada */
