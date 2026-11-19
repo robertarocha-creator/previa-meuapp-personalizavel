@@ -887,7 +887,7 @@ screens.apagar=()=>`${appbar(false)}
       <div class="monthlbl">Junho 2026</div>
       ${payItem('CSLL Lucro presumido','open',true)}
       ${payItem('CSLL Lucro presumido','open')}
-      ${payItem('ISSQN (Imposto Sobre Serviço de Qualquer Natureza)','late')}
+      ${payItem('DAS Simples Nacional','late')}
       <div class="monthlbl">Maio 2026</div>
       ${payItem('CSLL Lucro presumido','paid')}
       ${payItem('IRPJ Lucro presumido','paid')}
@@ -901,7 +901,7 @@ screens['apagar-item']=()=>{
   return `<div class="screen-light">
   ${back('A pagar','apagar')}
   <div class="detail-head">
-    <div class="dt">ISSQN (Imposto Sobre Serviço de Qualquer Natureza)</div>
+    <div class="dt">DAS Simples Nacional</div>
     <div class="row2">
       <div><div class="price">${done?'R$ 7.100,00':'R$ 6.300,00'}</div>${done?'<div class="oldprice">R$ 6.300,00</div>':''}</div>
       ${badge}
